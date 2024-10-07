@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const comments_1 = require("../controllers/comments");
+const auth_1 = __importDefault(require("../middleware/auth"));
+const check_rights_1 = require("../middleware/check-rights");
+const error_boundary_1 = __importDefault(require("../utils/error-boundary"));
+const validation_1 = __importDefault(require("../utils/validation"));
+const comments_2 = require("../validation/comments");
+const router = express_1.default.Router();
+router.get('/', (0, validation_1.default)(comments_2.getCommentsSchema, 'query'), (0, error_boundary_1.default)(comments_1.getComments));
+router.get('/:id', (0, error_boundary_1.default)(comments_1.getCommentById));
+router.use(auth_1.default);
+router.post('/', (0, validation_1.default)(comments_2.createSchema), (0, error_boundary_1.default)(comments_1.createComment));
+router.put('/:id', check_rights_1.checkUserCommentRights, (0, validation_1.default)(comments_2.updateSchema), (0, error_boundary_1.default)(comments_1.updateComment));
+router.delete('/:id', check_rights_1.checkUserCommentRights, (0, error_boundary_1.default)(comments_1.deleteComment));
+exports.default = router;

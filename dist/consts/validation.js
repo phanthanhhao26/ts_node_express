@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LONGITUDE = exports.LATITUDE = exports.FORMAT_THEME_LENGTH = exports.DISCOUNT = exports.PROMO_CODE_LENGTH = exports.COMMENT_CONTENT_LENGTH = exports.COMPANY_NAME_LENGTH = exports.EVENT_DESCRIPTION_LENGTH = exports.EVENT_NAME_LENGTH = exports.ROLE_ENUM = exports.PASSWORD_LENGTH = exports.FULL_NAME_LENGTH = exports.LOGIN_LENGTH = void 0;
+exports.LOGIN_LENGTH = { min: 4, max: 20 };
+exports.FULL_NAME_LENGTH = { min: 4, max: 30 };
+exports.PASSWORD_LENGTH = { min: 8, max: 20 };
+exports.ROLE_ENUM = ['user', 'admin'];
+exports.EVENT_NAME_LENGTH = { min: 5, max: 100 };
+exports.EVENT_DESCRIPTION_LENGTH = { min: 4, max: 60000 };
+exports.COMPANY_NAME_LENGTH = { min: 4, max: 100 };
+exports.COMMENT_CONTENT_LENGTH = { min: 4, max: 60000 };
+exports.PROMO_CODE_LENGTH = { min: 4, max: 50 };
+exports.DISCOUNT = { min: 1, max: 90 };
+exports.FORMAT_THEME_LENGTH = { min: 4, max: 100 };
+exports.LATITUDE = { min: -90, max: 90 };
+exports.LONGITUDE = { min: -180, max: 180 };

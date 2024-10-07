@@ -1,0 +1,21 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const formats_1 = require("../controllers/formats");
+const auth_1 = __importDefault(require("../middleware/auth"));
+const admin_auth_1 = __importDefault(require("../middleware/admin-auth"));
+const error_boundary_1 = __importDefault(require("../utils/error-boundary"));
+const validation_1 = __importDefault(require("../utils/validation"));
+const formats_themes_1 = require("../validation/formats-themes");
+const router = express_1.default.Router();
+router.get('/', (0, validation_1.default)(formats_themes_1.getManySchema, 'query'), (0, error_boundary_1.default)(formats_1.getFormats));
+router.get('/:id', (0, error_boundary_1.default)(formats_1.getFormatById));
+router.use(auth_1.default);
+router.use(admin_auth_1.default);
+router.post('/', (0, validation_1.default)(formats_themes_1.createUpdateSchema), (0, error_boundary_1.default)(formats_1.createFormat));
+router.put('/:id', (0, validation_1.default)(formats_themes_1.createUpdateSchema), (0, error_boundary_1.default)(formats_1.updateFormat));
+router.delete('/:id', (0, error_boundary_1.default)(formats_1.deleteFormat));
+exports.default = router;

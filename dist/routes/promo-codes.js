@@ -1,0 +1,20 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const promo_codes_1 = require("../controllers/promo-codes");
+const error_boundary_1 = __importDefault(require("../utils/error-boundary"));
+const auth_1 = __importDefault(require("../middleware/auth"));
+const validation_1 = __importDefault(require("../utils/validation"));
+const promo_codes_2 = require("../validation/promo-codes");
+const check_rights_1 = require("../middleware/check-rights");
+const router = express_1.default.Router();
+router.use(auth_1.default);
+router.get('/', (0, validation_1.default)(promo_codes_2.getPromoCodesSchema, 'query'), (0, error_boundary_1.default)(promo_codes_1.getPromoCodes));
+router.post('/', (0, validation_1.default)(promo_codes_2.createSchema), check_rights_1.checkUserEventRights, (0, error_boundary_1.default)(promo_codes_1.createPromoCode));
+router.get('/:id', check_rights_1.checkUserPromoCodeRights, (0, error_boundary_1.default)(promo_codes_1.getPromoCodeById));
+router.put('/:id', check_rights_1.checkUserPromoCodeRights, (0, validation_1.default)(promo_codes_2.updateSchema), (0, error_boundary_1.default)(promo_codes_1.updatePromoCode));
+router.delete('/:id', check_rights_1.checkUserPromoCodeRights, (0, error_boundary_1.default)(promo_codes_1.deletePromoCode));
+exports.default = router;

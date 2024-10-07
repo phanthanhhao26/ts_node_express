@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const auth_1 = __importDefault(require("./auth"));
+const companies_1 = __importDefault(require("./companies"));
+const events_1 = __importDefault(require("./events"));
+const users_1 = __importDefault(require("./users"));
+const comments_1 = __importDefault(require("./comments"));
+const promo_codes_1 = __importDefault(require("./promo-codes"));
+const formats_1 = __importDefault(require("./formats"));
+const themes_1 = __importDefault(require("./themes"));
+const profile_1 = __importDefault(require("./profile"));
+const user_companies_1 = __importDefault(require("./user-companies"));
+const router = express_1.default.Router();
+router.use('/auth', auth_1.default);
+router.use('/companies', companies_1.default);
+router.use('/events', events_1.default);
+router.use('/users', users_1.default);
+router.use('/comments', comments_1.default);
+router.use('/promo-codes', promo_codes_1.default);
+router.use('/formats', formats_1.default);
+router.use('/themes', themes_1.default);
+router.use('/me/companies', user_companies_1.default);
+router.use('/me/profile', profile_1.default);
+exports.default = router;
